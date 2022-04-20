@@ -4,6 +4,7 @@ import { useDrag } from "react-dnd";
 export const Picture = ({ url, id, alt }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "image",
+    item: { id: id },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging()
     })

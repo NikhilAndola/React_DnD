@@ -1,5 +1,6 @@
 import React from "react";
 import { Picture } from "./Picture";
+import { useDrag, useDrop } from "react-dnd";
 
 const ImageList = [
   {
@@ -23,6 +24,15 @@ const ImageList = [
 ];
 
 export const DragDrop = () => {
+  const [dropArea, setDropArea] = React.useState([]);
+
+  const [{ isOver }, drop] = useDrag(() => ({
+    accept: "image",
+    drop: (item) => addImageToDropArea(item.id)
+  }));
+
+  const addImageToDropArea = (id) => {};
+
   return (
     <>
       <div className="Pictures">
@@ -30,7 +40,11 @@ export const DragDrop = () => {
           <Picture url={item.url} id={item.id} alt={item.alt} key={i} />
         ))}
       </div>
-      <div className="DropArea"></div>
+      <div className="DropArea" ref={drop}>
+        {dropArea.map((item, index) => (
+          <Picture url={item.url} id={item.id} alt={item.alt} key={index} />
+        ))}
+      </div>
     </>
   );
 };
