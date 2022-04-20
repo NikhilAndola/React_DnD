@@ -26,12 +26,20 @@ const ImageList = [
 export const DragDrop = () => {
   const [dropArea, setDropArea] = React.useState([]);
 
-  const [{ isOver }, drop] = useDrag(() => ({
+  const [{ isOver }, drop] = useDrop(() => ({
     accept: "image",
-    drop: (item) => addImageToDropArea(item.id)
+    drop: (item) => addImageToDropArea(item.id),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver()
+    })
   }));
 
-  const addImageToDropArea = (id) => {};
+  const addImageToDropArea = (id) => {
+    const imageList = ImageList.filter((item) => item.id === id);
+    setDropArea((dropedItem) => [...dropedItem, imageList[0]]);
+    //For single picture
+    // setDropArea([imageList[0]]);
+  };
 
   return (
     <>

@@ -15,8 +15,8 @@ export const Picture = ({ url, id, alt }) => {
         ref={drag}
         src={url}
         alt={alt}
-        height="100px"
-        width="100px"
+        height="150px"
+        width="150px"
         style={{ border: isDragging ? "5px solid pink" : "0px" }}
       />
     </>
